@@ -1,0 +1,84 @@
+.message {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 80%;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.user {
+    align-self: flex-end;
+}
+
+.assistant {
+    align-self: flex-start;
+}
+
+.label {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.user .label {
+    text-align: right;
+    color: var(--accent);
+}
+
+.assistant .label::before {
+    content: '[ ';
+    color: var(--accent);
+}
+
+.assistant .label::after {
+    content: ' ]';
+    color: var(--accent);
+}
+
+.content {
+    padding: 14px 18px;
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    position: relative;
+}
+
+.user .content {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 168, 204, 0.15) 100%);
+    color: var(--text-primary);
+    border: 1px solid var(--accent);
+    box-shadow: var(--glow-sm);
+}
+
+.assistant .content {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent);
+}
+
+.assistant .content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: 0.5;
+}

@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* JARVIS Iron Man Theme - Dark with Cyan/Teal Glow */
+  --bg-primary: #020a0f;
+  --bg-secondary: #051520;
+  --bg-tertiary: #0a1f2e;
+  --text-primary: #e0f4ff;
+  --text-secondary: #6db8d9;
+  --accent: #00d4ff;
+  --accent-hover: #00a8cc;
+  --accent-glow: rgba(0, 212, 255, 0.4);
+  --accent-subtle: rgba(0, 212, 255, 0.1);
+  --border: #0e3a50;
+  --border-glow: #00d4ff;
+  --success: #00ff88;
+  --warning: #ffc107;
+  --error: #ff3d3d;
+  --radius: 4px;
+  --shadow: 0 0 30px rgba(0, 212, 255, 0.15);
+  --glow-sm: 0 0 10px rgba(0, 212, 255, 0.3);
+  --glow-md: 0 0 20px rgba(0, 212, 255, 0.4);
+  --glow-lg: 0 0 40px rgba(0, 212, 255, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Animated grid background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    linear-gradient(90deg, transparent 98%, rgba(0, 212, 255, 0.03) 100%),
+    linear-gradient(0deg, transparent 98%, rgba(0, 212, 255, 0.03) 100%);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Radial gradient overlay for depth */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at center, transparent 0%, var(--bg-primary) 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: text-shadow 0.2s ease;
+}
+
+a:hover {
+  text-shadow: var(--glow-sm);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+  box-shadow: var(--glow-sm);
+}
+
+/* Selection styling */
+::selection {
+  background: var(--accent);
+  color: var(--bg-primary);
+}

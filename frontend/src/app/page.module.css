@@ -1,0 +1,249 @@
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Header with JARVIS branding */
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+  padding: 24px;
+  position: relative;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  box-shadow: var(--glow-sm);
+}
+
+.title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-shadow: var(--glow-lg);
+  margin-bottom: 8px;
+  animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  from {
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.5), 0 0 40px rgba(0, 212, 255, 0.3);
+  }
+
+  to {
+    text-shadow: 0 0 30px rgba(0, 212, 255, 0.7), 0 0 60px rgba(0, 212, 255, 0.5);
+  }
+}
+
+.subtitle {
+  font-family: 'Rajdhani', sans-serif;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Status indicator */
+.statusIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 6px 16px;
+  background: var(--accent-subtle);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: var(--glow-sm);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: var(--glow-sm);
+  }
+
+  50% {
+    opacity: 0.5;
+    box-shadow: none;
+  }
+}
+
+/* Chat container with HUD-style border */
+.chatContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow);
+}
+
+.chatContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.7;
+}
+
+/* Corner brackets for HUD effect */
+.chatContainer::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 20px;
+  height: 20px;
+  border-left: 2px solid var(--accent);
+  border-top: 2px solid var(--accent);
+  opacity: 0.5;
+}
+
+.messages {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 400px;
+  max-height: 60vh;
+}
+
+.emptyState {
+  color: var(--text-secondary);
+  text-align: center;
+  margin: auto;
+  padding: 40px;
+}
+
+.emptyState p {
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.emptyState ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.emptyState li {
+  background: var(--accent-subtle);
+  padding: 14px 20px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.emptyState li::before {
+  content: '>';
+  margin-right: 10px;
+  color: var(--accent);
+  font-family: 'Orbitron', monospace;
+}
+
+.emptyState li:hover {
+  border-color: var(--accent);
+  background: rgba(0, 212, 255, 0.15);
+  box-shadow: var(--glow-sm);
+  transform: translateX(4px);
+}
+
+/* Loading animation - scanning line */
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px;
+  color: var(--accent);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+
+.loading::before {
+  content: 'PROCESSING';
+  font-family: 'Orbitron', monospace;
+  animation: blink 1s step-end infinite;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: var(--glow-sm);
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+    opacity: 0.3;
+  }
+
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
