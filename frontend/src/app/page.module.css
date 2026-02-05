@@ -2,61 +2,34 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 24px;
-  max-width: 1000px;
+  padding: 32px;
+  max-width: 900px;
   margin: 0 auto;
   position: relative;
 }
 
-/* Header with JARVIS branding */
+/* Header - clean card style */
 .header {
   text-align: center;
-  margin-bottom: 32px;
-  padding: 24px;
-  position: relative;
-}
-
-.header::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  box-shadow: var(--glow-sm);
+  margin-bottom: 24px;
+  padding: 24px 32px;
+  background: var(--card);
+  border: var(--border-width) solid var(--border);
+  box-shadow: var(--shadow);
 }
 
 .title {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 2.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--accent);
-  text-shadow: var(--glow-lg);
-  margin-bottom: 8px;
-  animation: titleGlow 3s ease-in-out infinite alternate;
-}
-
-@keyframes titleGlow {
-  from {
-    text-shadow: 0 0 20px rgba(0, 212, 255, 0.5), 0 0 40px rgba(0, 212, 255, 0.3);
-  }
-
-  to {
-    text-shadow: 0 0 30px rgba(0, 212, 255, 0.7), 0 0 60px rgba(0, 212, 255, 0.5);
-  }
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+  margin-bottom: 4px;
 }
 
 .subtitle {
-  font-family: 'Rajdhani', sans-serif;
-  color: var(--text-secondary);
-  font-size: 1rem;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
   font-weight: 400;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
 }
 
 /* Status indicator */
@@ -64,24 +37,23 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-top: 16px;
-  padding: 6px 16px;
-  background: var(--accent-subtle);
-  border: 1px solid var(--border);
-  border-radius: 20px;
+  margin-top: 12px;
+  padding: 6px 12px;
+  background: var(--primary);
+  border: 2px solid var(--border);
   font-size: 0.75rem;
-  color: var(--accent);
-  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: var(--primary-foreground);
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .statusDot {
   width: 8px;
   height: 8px;
-  background: var(--accent);
+  background: var(--foreground);
   border-radius: 50%;
-  box-shadow: var(--glow-sm);
-  animation: pulse 2s ease-in-out infinite;
+  animation: pulse 1.5s ease-in-out infinite;
 }
 
 @keyframes pulse {
@@ -89,50 +61,22 @@
   0%,
   100% {
     opacity: 1;
-    box-shadow: var(--glow-sm);
   }
 
   50% {
-    opacity: 0.5;
-    box-shadow: none;
+    opacity: 0.4;
   }
 }
 
-/* Chat container with HUD-style border */
+/* Chat container - card style */
 .chatContainer {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  overflow: hidden;
-  position: relative;
+  background: var(--card);
+  border: var(--border-width) solid var(--border);
   box-shadow: var(--shadow);
-}
-
-.chatContainer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  opacity: 0.7;
-}
-
-/* Corner brackets for HUD effect */
-.chatContainer::after {
-  content: '';
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  width: 20px;
-  height: 20px;
-  border-left: 2px solid var(--accent);
-  border-top: 2px solid var(--accent);
-  opacity: 0.5;
+  overflow: hidden;
 }
 
 .messages {
@@ -144,78 +88,62 @@
   gap: 16px;
   min-height: 400px;
   max-height: 60vh;
+  background: var(--background);
 }
 
 .emptyState {
-  color: var(--text-secondary);
+  color: var(--muted-foreground);
   text-align: center;
   margin: auto;
-  padding: 40px;
+  padding: 40px 24px;
 }
 
 .emptyState p {
-  margin-bottom: 20px;
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  margin-bottom: 24px;
+  font-size: 0.9375rem;
+  font-weight: 500;
 }
 
 .emptyState ul {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
+  max-width: 320px;
+  margin: 0 auto;
 }
 
 .emptyState li {
-  background: var(--accent-subtle);
-  padding: 14px 20px;
-  border-radius: var(--radius);
-  font-size: 0.9rem;
-  border: 1px solid var(--border);
+  background: var(--card);
+  padding: 12px 16px;
+  font-size: 0.875rem;
+  border: 2px solid var(--border);
   cursor: pointer;
-  transition: all 0.2s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.emptyState li::before {
-  content: '>';
-  margin-right: 10px;
-  color: var(--accent);
-  font-family: 'Orbitron', monospace;
+  transition: all 0.1s ease;
+  text-align: left;
 }
 
 .emptyState li:hover {
-  border-color: var(--accent);
-  background: rgba(0, 212, 255, 0.15);
-  box-shadow: var(--glow-sm);
-  transform: translateX(4px);
+  background: var(--primary);
+  box-shadow: 2px 2px 0 var(--border);
+  transform: translate(-2px, -2px);
 }
 
-/* Loading animation - scanning line */
+/* Loading animation */
 .loading {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 16px 20px;
-  color: var(--accent);
-  font-size: 0.85rem;
-  letter-spacing: 0.1em;
-}
-
-.loading::before {
-  content: 'PROCESSING';
-  font-family: 'Orbitron', monospace;
-  animation: blink 1s step-end infinite;
+  gap: 12px;
+  padding: 16px 24px;
+  color: var(--foreground);
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 
 .dot {
-  width: 6px;
-  height: 6px;
-  background: var(--accent);
-  border-radius: 50%;
-  box-shadow: var(--glow-sm);
+  width: 8px;
+  height: 8px;
+  background: var(--foreground);
   animation: bounce 1.4s infinite ease-in-out both;
 }
 
@@ -239,11 +167,5 @@
   40% {
     transform: scale(1);
     opacity: 1;
-  }
-}
-
-@keyframes blink {
-  50% {
-    opacity: 0;
   }
 }
