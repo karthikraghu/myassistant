@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import styles from "./page.module.css";
 import ChatInput from "@/components/ChatInput";
 import ChatMessage from "@/components/ChatMessage";
+import { Card } from "@/components/ui/card";
 
 interface Message {
   id: string;
@@ -58,25 +58,33 @@ export default function Home() {
   };
 
   return (
-    <main className={styles.main}>
-      <header className={styles.header}>
-        <h1 className={styles.title}>J.A.R.V.I.S</h1>
-        <p className={styles.subtitle}>Just A Rather Very Intelligent System</p>
-        <div className={styles.statusIndicator}>
-          <span className={styles.statusDot}></span>
-          Systems Online
+    <main className="min-h-screen flex flex-col p-6 max-w-3xl mx-auto">
+      {/* Header */}
+      <Card className="text-center p-6 mb-6 border-[3px] border-foreground shadow-[4px_4px_0_var(--foreground)]">
+        <h1 className="text-2xl font-bold tracking-tight">Personal Assistant</h1>
+        <p className="text-muted-foreground text-sm mt-1">Your AI-powered helper</p>
+        <div className="inline-flex items-center gap-2 mt-3 px-3 py-1 bg-primary border-2 border-foreground text-primary-foreground text-xs font-semibold uppercase">
+          <span className="w-2 h-2 bg-foreground rounded-full animate-pulse" />
+          Online
         </div>
-      </header>
+      </Card>
 
-      <div className={styles.chatContainer}>
-        <div className={styles.messages}>
+      {/* Chat Container */}
+      <Card className="flex-1 flex flex-col border-[3px] border-foreground shadow-[4px_4px_0_var(--foreground)] overflow-hidden">
+        {/* Messages */}
+        <div className="flex-1 p-6 overflow-y-auto flex flex-col gap-4 min-h-[400px] max-h-[60vh] bg-background">
           {messages.length === 0 && (
-            <div className={styles.emptyState}>
-              <p>Awaiting your command, sir</p>
-              <ul>
-                <li>Scan my schedule for today</li>
-                <li>Check for priority messages</li>
-                <li>Plan an optimal daily itinerary</li>
+            <div className="text-center text-muted-foreground m-auto p-6">
+              <p className="mb-4 font-medium">How can I help you today?</p>
+              <ul className="space-y-2 max-w-xs mx-auto">
+                {["Check my schedule", "Read my emails", "Plan my day"].map((item) => (
+                  <li
+                    key={item}
+                    className="p-3 bg-card border-2 border-foreground text-foreground text-sm cursor-pointer transition-all hover:bg-primary hover:shadow-[2px_2px_0_var(--foreground)] hover:translate-x-[-2px] hover:translate-y-[-2px]"
+                  >
+                    {item}
+                  </li>
+                ))}
               </ul>
             </div>
           )}
@@ -84,16 +92,16 @@ export default function Home() {
             <ChatMessage key={msg.id} message={msg} />
           ))}
           {isLoading && (
-            <div className={styles.loading}>
-              <span className={styles.dot}></span>
-              <span className={styles.dot}></span>
-              <span className={styles.dot}></span>
+            <div className="flex items-center gap-2 text-muted-foreground text-sm font-medium">
+              <span className="w-2 h-2 bg-foreground rounded-full animate-bounce" />
+              <span className="w-2 h-2 bg-foreground rounded-full animate-bounce [animation-delay:0.1s]" />
+              <span className="w-2 h-2 bg-foreground rounded-full animate-bounce [animation-delay:0.2s]" />
             </div>
           )}
         </div>
 
         <ChatInput onSend={handleSendMessage} disabled={isLoading} />
-      </div>
+      </Card>
     </main>
   );
 }

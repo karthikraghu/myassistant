@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, KeyboardEvent } from "react";
-import styles from "./ChatInput.module.css";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 interface ChatInputProps {
     onSend: (message: string) => void;
@@ -26,23 +27,22 @@ export default function ChatInput({ onSend, disabled }: ChatInputProps) {
     };
 
     return (
-        <div className={styles.container}>
-            <textarea
-                className={styles.input}
+        <div className="flex gap-3 p-4 border-t-[3px] border-foreground bg-card">
+            <Textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="What can I help you with today, sir?"
+                placeholder="What can I help you with today?"
                 disabled={disabled}
                 rows={1}
+                className="min-h-10 flex-1"
             />
-            <button
-                className={styles.button}
+            <Button
                 onClick={handleSubmit}
                 disabled={disabled || !input.trim()}
             >
-                Execute
-            </button>
+                Send
+            </Button>
         </div>
     );
 }
