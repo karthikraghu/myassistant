@@ -1,45 +1,55 @@
-# Personal Executive Assistant Agent
+# Personal Executive Assistant
 
-Python + Next.js AI agent using Gemini LLM to aggregate Gmail and Calendar data.
+AI-powered personal assistant using **LangChain + Gemini** 
 
-## Structure
+## Quick Start
 
-```
-├── src/                    # Python backend
-│   ├── main.py             # Entry point
-│   ├── core/               # LLM + prompts
-│   ├── tools/              # Gmail, Calendar API wrappers
-│   └── utils/              # OAuth handler
-│
-└── frontend/               # Next.js app
-    └── src/
-        ├── app/            # Pages + API routes
-        └── components/     # Chat UI components
+### Backend
+```powershell
+cd backend
+.\venv\Scripts\activate
+python src\server.py
 ```
 
-## Backend Setup
-
-```bash
-python -m venv venv
-.\venv\Scripts\activate        # Windows
-pip install -r requirements.txt
-```
-
-1. Add `credentials.json` from Google Cloud Console
-2. Copy `.env.example` to `.env`, set `GEMINI_API_KEY`
-3. Run: `python src/main.py`
-
-## Frontend Setup
-
-```bash
+### Frontend
+```powershell
 cd frontend
-npm install
 npm run dev
 ```
 
-Copy `frontend/.env.example` to `frontend/.env.local`
+Open `http://localhost:3000`
 
-## Required Scopes
+---
 
-- `gmail.readonly`
-- `calendar.readonly`
+## Project Structure
+
+```
+personal-assistant-agent/
+├── backend/                    # Python API
+│   ├── .env                    # GEMINI_API_KEY
+│   ├── requirements.txt
+│   ├── venv/
+│   ├── secrets/                # OAuth credentials (gitignored)
+│   │   ├── credentials.json
+│   │   └── token.json
+│   └── src/
+│       ├── server.py           # FastAPI entry point
+│       ├── core/
+│       │   ├── agent.py        # LangChain ReAct agent
+│       │   └── prompts.py
+│       ├── tools/
+│       │   ├── __init__.py     # Clean exports
+│       │   ├── gmail.py
+│       │   └── calendar.py
+│       └── utils/
+│           └── auth.py         # Google OAuth
+│
+├── frontend/                   # Next.js UI
+│   ├── .env.local              # BACKEND_URL
+│   └── src/app/
+│
+└── .gitignore
+```
+
+---
+
