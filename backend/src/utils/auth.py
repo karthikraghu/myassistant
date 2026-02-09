@@ -16,10 +16,10 @@ SCOPES = [
     "https://www.googleapis.com/auth/calendar.readonly"
 ]
 
-# Path to credentials files (relative to project root)
+# Path to credentials files (in secrets folder)
 PROJECT_ROOT = Path(__file__).parent.parent.parent
-CREDENTIALS_FILE = PROJECT_ROOT / "credentials.json"
-TOKEN_FILE = PROJECT_ROOT / "token.json"
+CREDENTIALS_FILE = PROJECT_ROOT / "secrets" / "credentials.json"
+TOKEN_FILE = PROJECT_ROOT / "secrets" / "token.json"
 
 
 def authenticate_google() -> Credentials | None:
@@ -77,6 +77,8 @@ def authenticate_google() -> Credentials | None:
         # Save the credentials for next run
         if creds:
             try:
+                # Ensure secrets directory exists
+                TOKEN_FILE.parent.mkdir(parents=True, exist_ok=True)
                 with open(TOKEN_FILE, "w") as token:
                     token.write(creds.to_json())
                 print(f"[OK] Token saved to: {TOKEN_FILE}")
