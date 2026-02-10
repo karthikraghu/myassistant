@@ -107,6 +107,36 @@ async def chat(request: ChatRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.get("/emails")
+async def get_emails():
+    """Return raw unread emails from Gmail (bypass agent)."""
+    if not agent:
+        raise HTTPException(status_code=503, detail="Agent not initialized")
+    
+    try:
+        from tools import get_unread_emails
+        import json
+        raw = get_unread_emails.invoke({"max_results": 10})
+        return json.loads(raw)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/events")
+async def get_events():
+    """Return raw today's calendar events (bypass agent)."""
+    if not agent:
+        raise HTTPException(status_code=503, detail="Agent not initialized")
+    
+    try:
+        from tools import get_today_events
+        import json
+        raw = get_today_events.invoke({})
+        return json.loads(raw)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.post("/reset")
 async def reset_conversation():
     """Reset the conversation history."""
